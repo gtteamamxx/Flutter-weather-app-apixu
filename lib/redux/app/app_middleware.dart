@@ -1,0 +1,39 @@
+import 'package:empty_app/redux/actions/app_actions.dart';
+import 'package:empty_app/redux/actions/dashboard_actions.dart';
+import 'package:empty_app/redux/app/app_state.dart';
+import 'package:empty_app/resources/user_data_provider.dart';
+import 'package:empty_app/ui/dashboard/dashboard_page.dart';
+import 'package:empty_app/ui/select_city/select_city_page.dart';
+import 'package:flutter/material.dart';
+import 'package:redux/redux.dart';
+
+void appMiddleware(Store<AppState> state, dynamic action, NextDispatcher next) async {
+  if(action is ErrorBaseAction) {
+    next(ShowErrorAction(action.error));
+  } if(action is ShowDashboardPageAction) {
+    _showPage(action.context, DashboardPage());
+  } else if(action is ShowSelectCityPageAction) {
+    _showPage(action.context, SelectCityPage());
+  } else if(action is LoadCityNameFromPrefsAction) {
+    await _loadCityNameFromPrefsAction(next);
+  } else {
+    next(action);
+  }
+}
+
+Future _loadCityNameFromPrefsAction(NextDispatcher next) async {
+  try
+  {
+    String userCity = await UserDataProvider.getCity();
+    next(ChangeCityForWeatherAction(userCity));
+  } 
+  catch (ex)
+  {
+    next(ErrorLoadingCityForWeatherAction());
+    next(ChangeCityForWeatherAction(null));
+  }
+}
+
+void _showPage(BuildContext context, dynamic page) {
+  Navigator.push(context, MaterialPageRoute(builder: (_) => page));
+}
