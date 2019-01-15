@@ -59,7 +59,8 @@ class SelectCityPage extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(15.0),
         child: Text(city.name),
-      )
+      ),
+      onTap: () => viewModel.onCitySelected(city.name),
     );
   }
 }
