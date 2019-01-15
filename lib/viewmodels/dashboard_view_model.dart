@@ -8,14 +8,17 @@ typedef void OnTap(BuildContext context);
 
 class DashboardViewModel {
   DashboardViewModel({
-    @required this.onTap
+    @required this.onTap,
+    @required this.cityName
   });
   
   final OnTap onTap;
+  final String cityName;
 
   static DashboardViewModel fromStore(Store<AppState> store) {
     return DashboardViewModel(
-      onTap: (BuildContext context) => _onTap(store, context)
+      onTap: (BuildContext context) => _onTap(store, context),
+      cityName: store.state.cityName
     );
   }
 
