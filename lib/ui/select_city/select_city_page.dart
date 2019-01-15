@@ -19,30 +19,33 @@ class SelectCityPage extends StatelessWidget {
         ));
       },
       builder: (BuildContext context, SelectCityPageViewModel viewModel) {
-        return Column(
-          children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
-              color: Colors.black,
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: viewModel.cityName ?? "Wpisz nazwę miasta",
+        return Material(
+          child:
+            Column(
+            children: [
+              Container(
+                padding: EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
+                color: Colors.black,
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: viewModel.cityName ?? "Wpisz nazwę miasta",
+                  ),
+                  onChanged: (String text) => viewModel.onCityNameChanged(text),
                 ),
-                onChanged: (String text) => viewModel.onCityNameChanged(text),
               ),
-            ),
-            Expanded(
-                child: viewModel.isLoading 
-                ? _loadingScreen() 
-                : ListView.builder(
-                    itemCount: viewModel.cities.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      AutoCompleteCityModel city = viewModel.cities.elementAt(index);
-                      return _buildAutoCompleteCityModelByCity(city, viewModel);
-                    },
-                  )
-            ),
-          ]
+              Expanded(
+                  child: viewModel.isLoading 
+                  ? _loadingScreen() 
+                  : ListView.builder(
+                      itemCount: viewModel.cities.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        AutoCompleteCityModel city = viewModel.cities.elementAt(index);
+                        return _buildAutoCompleteCityModelByCity(city, viewModel);
+                      },
+                    )
+              ),
+            ]
+          )
         );
       }
     );

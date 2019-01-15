@@ -39,7 +39,6 @@ void _showPage(BuildContext context, dynamic page) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => page));
 }
 
-
 String _lastMessage = "'";
 void _showMessageByAction(ErrorBaseAction action) {
   GlobalKey<ScaffoldState> scaffoldState = serviceLocator.get<GlobalKey<ScaffoldState>>();
