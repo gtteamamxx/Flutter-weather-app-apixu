@@ -1,3 +1,4 @@
+import 'package:empty_app/other/service_locator.dart';
 import 'package:empty_app/redux/actions/app_actions.dart';
 import 'package:empty_app/redux/actions/dashboard_actions.dart';
 import 'package:empty_app/redux/app/app_state.dart';
@@ -9,7 +10,7 @@ import 'package:redux/redux.dart';
 
 void appMiddleware(Store<AppState> state, dynamic action, NextDispatcher next) async {
   if(action is ErrorBaseAction) {
-    next(ShowErrorAction(action.error));
+    _showMessageByAction(action);
   } if(action is ShowDashboardPageAction) {
     _showPage(action.context, DashboardPage());
   } else if(action is ShowSelectCityPageAction) {
@@ -36,4 +37,23 @@ Future _loadCityNameFromPrefsAction(NextDispatcher next) async {
 
 void _showPage(BuildContext context, dynamic page) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => page));
+}
+
+
+String _lastMessage = "'";
+void _showMessageByAction(ErrorBaseAction action) {
+  GlobalKey<ScaffoldState> scaffoldState = serviceLocator.get<GlobalKey<ScaffoldState>>();
+
+  if(_lastMessage == action.error) {
+    scaffoldState.currentState.removeCurrentSnackBar();
+  } else {
+    _lastMessage = action.error;
+  }
+
+  scaffoldState.currentState.showSnackBar(
+    SnackBar(
+      content: Text(action.error),
+      duration: Duration(seconds: 1),
+    )
+  );
 }
