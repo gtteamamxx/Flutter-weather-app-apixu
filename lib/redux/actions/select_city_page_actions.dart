@@ -1,5 +1,6 @@
 import 'package:empty_app/models/auto_complete_city/auto_complete_city_model.dart';
 import 'package:empty_app/redux/actions/app_actions.dart';
+import 'package:flutter/material.dart';
 
 class FetchAutoCompleteCitiesForSelectCityPageAction {
   FetchAutoCompleteCitiesForSelectCityPageAction({this.city});
@@ -18,6 +19,7 @@ class ReceivedAutoCompleteCitiesForSelectCityPageAction {
 }
 
 class SelectCityNameAction {
-  SelectCityNameAction(this.cityName);
+  SelectCityNameAction(this.cityName, this.context);
   final String cityName;
+  final BuildContext context;
 }

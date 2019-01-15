@@ -13,11 +13,13 @@ class _DashboardPageState extends State<DashboardPage> {
     return StoreConnector<AppState, DashboardViewModel>(
       converter: (store) => DashboardViewModel.fromStore(store),
       builder: (BuildContext context, DashboardViewModel viewModel) {
-        return Center(child: 
-            InkWell(
-              child: Text("Kliknij mnie"),
-              onTap: () => viewModel.onTap(context),
-            ),
+        return Material(child: 
+          Center(child: 
+              InkWell(
+                child: Text("Kliknij mnie"),
+                onTap: () => viewModel.onTap(context),
+              ),
+          )
         );
       },
     );

@@ -1,10 +1,11 @@
 import 'package:empty_app/models/auto_complete_city/auto_complete_city_model.dart';
 import 'package:empty_app/redux/actions/select_city_page_actions.dart';
 import 'package:empty_app/redux/app/app_state.dart';
+import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 
 typedef void OnCityNameChanged(String text);
-typedef void OnCitySelected(String text);
+typedef void OnCitySelected(BuildContext context, String text);
 
 class SelectCityPageViewModel {
   SelectCityPageViewModel({
@@ -27,7 +28,7 @@ class SelectCityPageViewModel {
       cities: store.state.selectCityPageState.cities,
       isLoading: store.state.selectCityPageState.isLoading,
       onCityNameChanged: (String cityName) => _onCityNameChanged(store, cityName),
-      onCitySelected: (String cityName) => _onCitySelected(store, cityName)
+      onCitySelected: (BuildContext context, String cityName) => _onCitySelected(store, cityName, context)
     );
   }
 
@@ -39,9 +40,9 @@ class SelectCityPageViewModel {
     ));
   }
 
-  static void _onCitySelected(Store<AppState> store, String cityName) {
+  static void _onCitySelected(Store<AppState> store, String cityName, BuildContext context) {
     if(cityName == null || cityName.isEmpty) return;
 
-    store.dispatch(SelectCityNameAction(cityName));
+    store.dispatch(SelectCityNameAction(cityName, context));
   }
 }
