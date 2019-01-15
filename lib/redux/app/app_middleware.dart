@@ -8,7 +8,7 @@ import 'package:empty_app/ui/select_city/select_city_page.dart';
 import 'package:flutter/material.dart';
 import 'package:redux/redux.dart';
 
-void appMiddleware(Store<AppState> state, dynamic action, NextDispatcher next) async {
+void appMiddleware(Store<AppState> store, dynamic action, NextDispatcher next) async {
   if(action is ErrorBaseAction) {
     _showMessageByAction(action);
   } if(action is ShowDashboardPageAction) {
@@ -16,13 +16,13 @@ void appMiddleware(Store<AppState> state, dynamic action, NextDispatcher next) a
   } else if(action is ShowSelectCityPageAction) {
     _showPage(action.context, SelectCityPage());
   } else if(action is LoadCityNameFromPrefsAction) {
-    await _loadCityNameFromPrefsAction(next);
+    await _loadCityNameFromPrefsAction(store, next);
   } else {
     next(action);
   }
 }
 
-Future _loadCityNameFromPrefsAction(NextDispatcher next) async {
+Future _loadCityNameFromPrefsAction(Store<AppState> store, NextDispatcher next) async {
   try
   {
     String userCity = await UserDataProvider.getCity();
@@ -30,7 +30,7 @@ Future _loadCityNameFromPrefsAction(NextDispatcher next) async {
   } 
   catch (ex)
   {
-    next(ErrorLoadingCityForWeatherAction());
+    store.dispatch(ErrorLoadingCityForWeatherAction());
     next(ChangeCityForWeatherAction(null));
   }
 }
