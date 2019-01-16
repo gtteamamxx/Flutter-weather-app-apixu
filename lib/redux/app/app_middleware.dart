@@ -17,21 +17,35 @@ void appMiddleware(Store<AppState> store, dynamic action, NextDispatcher next) a
     _showPage(action.context, SelectCityPage());
   } else if(action is LoadCityNameFromPrefsAction) {
     await _loadCityNameFromPrefsAction(store, next);
+  } else if(action is SaveCityNameToPrefsAction) {
+    await _saveCityNameToPrefsAction(action);
   } else {
     next(action);
   }
 }
 
 Future _loadCityNameFromPrefsAction(Store<AppState> store, NextDispatcher next) async {
-  try
-  {
+  try {
     String userCity = await UserDataProvider.getCity();
     next(ChangeCityForWeatherAction(userCity));
-  } 
-  catch (ex)
-  {
+  } catch (ex) {
+    print(ex);
     store.dispatch(ErrorLoadingCityForWeatherAction());
     next(ChangeCityForWeatherAction(null));
+  }
+}
+
+Future _saveCityNameToPrefsAction(SaveCityNameToPrefsAction action) async {
+  bool success = false;
+  try {
+    success = await UserDataProvider.saveCity(action.cityName);
+  } catch (ex) {
+    print(ex);
+    success = false;
+  }
+
+  if(!success) {
+    _showMessageByAction(ErrorSavingCityToPrefsAction());
   }
 }
 

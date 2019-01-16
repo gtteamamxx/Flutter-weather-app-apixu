@@ -11,6 +11,7 @@ void selectCityPageMiddleware(Store<AppState> store, dynamic action, NextDispatc
     await _fetchAutoCompleteCitiesForSelectCityPage(store, action, next);
   } else if(action is SelectCityNameAction) {
     store.dispatch(ChangeCityForWeatherAction(action.cityName));
+    store.dispatch(SaveCityNameToPrefsAction(action.cityName));
     store.dispatch(ShowDashboardPageAction(action.context));
   } else {
     next(action);

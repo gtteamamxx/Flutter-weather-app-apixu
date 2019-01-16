@@ -28,4 +28,11 @@ class DashboardViewModel {
     );
   }
 
+  String getLastUpdateDate() {
+    DateTime date = DateTime.parse(weatherModel.lastUpdate);
+    if(date == null) return '00:00';
+    int hours = date.hour;
+    int minutes = date.minute;
+    return "${hours >= 10 ? hours: '0' + hours.toString()}:${minutes >= 10 ? minutes : '0' + minutes.toString()}";
+  }
 }

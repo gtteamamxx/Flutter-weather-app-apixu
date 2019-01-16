@@ -16,8 +16,18 @@ class _DashboardPageState extends State<DashboardPage> {
       onInit: (store) => store.dispatch(FetchCurrentWeatherAction(store.state.cityName)),
       builder: (BuildContext context, DashboardViewModel viewModel) {
         return Material(
-          child: Container(
-            padding: EdgeInsets.all(25),
+          child: viewModel.isLoading ? _buildProgressIndicator() : Container(
+            padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 20.0),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              gradient: LinearGradient(
+                colors: [Colors.blueAccent, Colors.blue, Colors.cyan],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                tileMode: TileMode.repeated,
+                stops: [0.2, 0.45, 0.9]
+              )
+            ),
             child: Column(
               children: <Widget>[
                 Text(
@@ -30,8 +40,8 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 Row(
                   children: <Widget>[
-                    Text("obrazek"),
-                    Text("-1" + "*"),
+                    Image.network(viewModel.weatherModel.condition.iconUrl),
+                    Text(viewModel.weatherModel.feelTempC.toString() + "*"),
                     Column(
                       children: <Widget>[
                         InkWell(child: Text("C")),
@@ -40,20 +50,20 @@ class _DashboardPageState extends State<DashboardPage> {
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,
                 ),
-                Text("Niewielkie opady śniegu"),
-                Text("Zaktualizowano o godzinie 11:34"),
+                Text(viewModel.weatherModel.condition.description),
+                Text('Zaaktualizowano o godzinie ' + viewModel.getLastUpdateDate()),
                 Row(
                   children: <Widget>[
-                    Text("Temperatura odczuwalna -8*"),
-                    Text("Wiatr 31 km/h"),
-                    Text("Widoczność 6km")
+                    Text("Temperatura odczuwalna " + viewModel.weatherModel.feelTempC.toString() + "*C"),
+                    Text("Wiatr " + viewModel.weatherModel.windKph.toString() + " km/h"),
+                    Text("Widoczność " + viewModel.weatherModel.visKm.toStringAsFixed(0))
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,
                 ),
                 Row(
                   children: <Widget>[
-                    Text("Barometr 1007,00 mbar"),
-                    Text("Wilgotność 92%"),
+                    Text("Barometr " + viewModel.weatherModel.pressureMb.toStringAsFixed(0) + " mbar"),
+                    Text("Wilgotność " + viewModel.weatherModel.humidity.toStringAsFixed(0) + "%"),
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,
                 )
@@ -62,6 +72,18 @@ class _DashboardPageState extends State<DashboardPage> {
           )
         );
       },
+    );
+  }
+
+  Widget _buildProgressIndicator() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text("Wczytywanie pogody..."),
+          CircularProgressIndicator() 
+        ],
+      )
     );
   }
 } 

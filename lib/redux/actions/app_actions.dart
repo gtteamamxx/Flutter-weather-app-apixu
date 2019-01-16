@@ -6,6 +6,11 @@ class LoadCityNameFromPrefsAction {
   LoadCityNameFromPrefsAction(this.context);
 }
 
+class SaveCityNameToPrefsAction {
+  SaveCityNameToPrefsAction(this.cityName);
+  final String cityName;
+}
+
 class ChangeCityForWeatherAction {
   final String cityName;
 
@@ -29,5 +34,9 @@ class ShowErrorAction {
 }
 
 class ErrorLoadingCityForWeatherAction extends ErrorBaseAction {
-  ErrorLoadingCityForWeatherAction() : super("Wystąpił błąd podczas wczytywania ostatnie lokalizacji.");
+  ErrorLoadingCityForWeatherAction() : super("Wystąpił błąd podczas wczytywania ostatniej lokalizacji.");
+}
+
+class ErrorSavingCityToPrefsAction extends ErrorBaseAction {
+  ErrorSavingCityToPrefsAction() : super("Wystąpił problem pdoczas zapisywania lokalizacji.");
 }
