@@ -1,6 +1,6 @@
 import 'package:empty_app/other/service_locator.dart';
 import 'package:empty_app/redux/actions/app_actions.dart';
-import 'package:empty_app/redux/actions/dashboard_actions.dart';
+import 'package:empty_app/redux/actions/dashboard_page_actions.dart';
 import 'package:empty_app/redux/app/app_state.dart';
 import 'package:empty_app/resources/user_data_provider.dart';
 import 'package:empty_app/ui/dashboard/dashboard_page.dart';

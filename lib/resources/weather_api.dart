@@ -1,6 +1,7 @@
 import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 import 'package:empty_app/models/auto_complete_city/auto_complete_city_model.dart';
+import 'package:empty_app/models/current_weather_base/current_weather_base_model.dart';
 import 'package:empty_app/other/serializers.dart';
 
 class WeatherApi {
@@ -17,6 +18,16 @@ class WeatherApi {
     Response response = await client.get(url);  
 
     return _resultListFromResponse(response, AutoCompleteCityModel.serializer);
+  }
+
+  Future<CurrentWeatherBaseModel> fetchCurrentWeatherByCityName(String cityName) async {
+    assert(cityName != null);
+    assert(cityName.isNotEmpty);
+
+    final String url = "http://api.apixu.com/v1/current.json?key=$key&q=$cityName";
+    Response response = await client.get(url);  
+
+    return _resultFromResponse(response, CurrentWeatherBaseModel.serializer);
   }
 
   List<T> _resultListFromResponse<T>(Response response, Serializer<T> serializer) {

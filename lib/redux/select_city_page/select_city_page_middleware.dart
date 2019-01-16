@@ -27,6 +27,7 @@ _fetchAutoCompleteCitiesForSelectCityPage(Store<AppState> store, FetchAutoComple
   } 
   catch (ex) {
     print(ex);
-    store.dispatch(ErrorLoadingAutoCompleteCitiesAction());
+    next(ErrorLoadingAutoCompleteCitiesAction);
+    store.dispatch(ShowUnableToloadAutoCompleteCitiesAction());
   }
 }

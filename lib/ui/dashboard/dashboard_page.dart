@@ -1,3 +1,4 @@
+import 'package:empty_app/redux/actions/dashboard_page_actions.dart';
 import 'package:empty_app/redux/app/app_state.dart';
 import 'package:empty_app/viewmodels/dashboard_view_model.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, DashboardViewModel>(
       converter: (store) => DashboardViewModel.fromStore(store),
+      onInit: (store) => store.dispatch(FetchCurrentWeatherAction(store.state.cityName)),
       builder: (BuildContext context, DashboardViewModel viewModel) {
         return Material(
           child: Container(
