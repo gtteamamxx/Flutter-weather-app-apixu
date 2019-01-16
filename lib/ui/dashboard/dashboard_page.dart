@@ -40,12 +40,21 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 Row(
                   children: <Widget>[
-                    Image.network(viewModel.weatherModel.condition.iconUrl),
-                    Text(viewModel.weatherModel.feelTempC.toString() + "*"),
+                    Image.network(viewModel.getConditionImageUrl()),
+                    SizedBox.fromSize(size: Size(10.0, 0.0)),
+                    Text(
+                      viewModel.weatherModel.feelTempC.toStringAsFixed(0) + "°",
+                      style: TextStyle(
+                        fontSize: 60
+                      )),
+                    SizedBox.fromSize(size: Size(20.0, 0.0)),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        InkWell(child: Text("C")),
-                        InkWell(child: Text("F"))
+                        InkWell(child: Text("C", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+                        InkWell(child: Text("F", style: TextStyle(fontSize: 20))),
+                        SizedBox.fromSize(size: Size(0.0, 10))
                       ]),
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -54,9 +63,9 @@ class _DashboardPageState extends State<DashboardPage> {
                 Text('Zaaktualizowano o godzinie ' + viewModel.getLastUpdateDate()),
                 Row(
                   children: <Widget>[
-                    Text("Temperatura odczuwalna " + viewModel.weatherModel.feelTempC.toString() + "*C"),
+                    Text("Temperatura odczuwalna " + viewModel.weatherModel.feelTempC.toString() + "°C"),
                     Text("Wiatr " + viewModel.weatherModel.windKph.toString() + " km/h"),
-                    Text("Widoczność " + viewModel.weatherModel.visKm.toStringAsFixed(0))
+                    // Text("Widoczność " + viewModel.weatherModel.visKm.toStringAsFixed(0))
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,
                 ),

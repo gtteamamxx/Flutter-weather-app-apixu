@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:empty_app/resources/translations_helper.dart';
 import 'package:empty_app/resources/weather_api.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -11,5 +12,5 @@ void configureServiceLocator() {
   serviceLocator.registerSingleton<WeatherApi>(WeatherApi(serviceLocator.get<Dio>()));
 
   serviceLocator.registerSingleton<GlobalKey<ScaffoldState>>(GlobalKey<ScaffoldState>());
-
+  serviceLocator.registerSingleton<TranslationsHelper>(TranslationsHelper(serviceLocator.get<WeatherApi>()));
 }

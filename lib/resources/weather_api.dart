@@ -2,6 +2,7 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 import 'package:empty_app/models/auto_complete_city/auto_complete_city_model.dart';
 import 'package:empty_app/models/current_weather_base/current_weather_base_model.dart';
+import 'package:empty_app/models/translate_base/translate_model_base.dart';
 import 'package:empty_app/other/serializers.dart';
 
 class WeatherApi {
@@ -28,6 +29,13 @@ class WeatherApi {
     Response response = await client.get(url);  
 
     return _resultFromResponse(response, CurrentWeatherBaseModel.serializer);
+  }
+
+  Future<List<TranslateBaseModel>> fetchTranslations() async {
+    final String url = "http://www.apixu.com/doc/conditions.json";
+    Response response = await client.get(url);
+
+    return _resultListFromResponse(response, TranslateBaseModel.serializer);
   }
 
   List<T> _resultListFromResponse<T>(Response response, Serializer<T> serializer) {

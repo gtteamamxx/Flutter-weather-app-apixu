@@ -2,6 +2,7 @@ import 'package:empty_app/other/service_locator.dart';
 import 'package:empty_app/redux/actions/app_actions.dart';
 import 'package:empty_app/redux/actions/dashboard_page_actions.dart';
 import 'package:empty_app/redux/app/app_state.dart';
+import 'package:empty_app/resources/translations_helper.dart';
 import 'package:empty_app/resources/user_data_provider.dart';
 import 'package:empty_app/ui/dashboard/dashboard_page.dart';
 import 'package:empty_app/ui/select_city/select_city_page.dart';
@@ -19,6 +20,8 @@ void appMiddleware(Store<AppState> store, dynamic action, NextDispatcher next) a
     await _loadCityNameFromPrefsAction(store, next);
   } else if(action is SaveCityNameToPrefsAction) {
     await _saveCityNameToPrefsAction(action);
+  } else if(action is InitializeTranslationsAction) {
+    await _initializeTranslations();
   } else {
     next(action);
   }
@@ -49,6 +52,15 @@ Future _saveCityNameToPrefsAction(SaveCityNameToPrefsAction action) async {
   }
 }
 
+Future _initializeTranslations() async {
+  TranslationsHelper translationsHelper = serviceLocator.get<TranslationsHelper>();
+  bool areTranslationsInitialized = await translationsHelper.initialize();
+
+  if(!areTranslationsInitialized) {
+    _showMessageByAction(ErrorLoadingTranslationsAction());
+  }
+}
+
 void _showPage(BuildContext context, dynamic page) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => page));
 }
@@ -66,7 +78,7 @@ void _showMessageByAction(ErrorBaseAction action) {
   scaffoldState.currentState.showSnackBar(
     SnackBar(
       content: Text(action.error),
-      duration: Duration(seconds: 1),
+      duration: action.duration ?? Duration(seconds: 1),
     )
   );
 }

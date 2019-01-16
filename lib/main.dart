@@ -24,7 +24,10 @@ class WeatherApp extends StatelessWidget {
         theme: ThemeData.dark(),
         home: StoreConnector<AppState, dynamic>(
           converter: (store) => Null,
-          onInit: (store) => store.dispatch(LoadCityNameFromPrefsAction(context)),
+          onInit: (store) {
+            store.dispatch(InitializeTranslationsAction());
+            store.dispatch(LoadCityNameFromPrefsAction(context));
+          },
           builder: (context, viewModel) => ScaffoldPage(store)
         )
       ),

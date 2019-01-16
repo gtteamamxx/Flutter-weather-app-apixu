@@ -35,4 +35,10 @@ class DashboardViewModel {
     int minutes = date.minute;
     return "${hours >= 10 ? hours: '0' + hours.toString()}:${minutes >= 10 ? minutes : '0' + minutes.toString()}";
   }
+
+  String getConditionImageUrl() {
+    final String url = weatherModel.condition.iconUrl;
+    final String fixedUrl = "http://" + url.substring(2);
+    return fixedUrl;
+  }
 }

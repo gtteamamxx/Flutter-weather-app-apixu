@@ -24,8 +24,9 @@ class ShowDashboardPageAction {
 }
 
 abstract class ErrorBaseAction {
-  ErrorBaseAction(this.error);
+  ErrorBaseAction(this.error, [this.duration]);
   final String error;
+  final Duration duration;
 }
 
 class ShowErrorAction {
@@ -40,3 +41,9 @@ class ErrorLoadingCityForWeatherAction extends ErrorBaseAction {
 class ErrorSavingCityToPrefsAction extends ErrorBaseAction {
   ErrorSavingCityToPrefsAction() : super("Wystąpił problem pdoczas zapisywania lokalizacji.");
 }
+
+class ErrorLoadingTranslationsAction extends ErrorBaseAction {
+  ErrorLoadingTranslationsAction() : super("Wystapił problem podczas wczytywania tłumaczeń.", Duration(seconds: 3));
+}
+
+class InitializeTranslationsAction { }
