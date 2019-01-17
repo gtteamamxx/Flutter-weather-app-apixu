@@ -11,6 +11,8 @@ abstract class ConditionModel implements Built<ConditionModel, ConditionModelBui
   @BuiltValueField(wireName: "icon")
   String get iconUrl;
   
+  int get code;
+
   ConditionModel._();
   factory ConditionModel([updates(ConditionModelBuilder b)]) => _$ConditionModel();
 }

@@ -47,3 +47,5 @@ class ErrorLoadingTranslationsAction extends ErrorBaseAction {
 }
 
 class InitializeTranslationsAction { }
+
+class TranslationsInitializedAction { }

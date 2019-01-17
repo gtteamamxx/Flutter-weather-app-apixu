@@ -23,5 +23,10 @@ DashboardPageState dashboardPageReducer(DashboardPageState dashboardPageState, d
     );
   }
 
+  if (action is ChangeTemperatureFormatAction) {
+    return dashboardPageState.copyWith(
+      temperatureType: action.temperatureType
+    );
+  }
   return dashboardPageState;
 }

@@ -21,7 +21,7 @@ void appMiddleware(Store<AppState> store, dynamic action, NextDispatcher next) a
   } else if(action is SaveCityNameToPrefsAction) {
     await _saveCityNameToPrefsAction(action);
   } else if(action is InitializeTranslationsAction) {
-    await _initializeTranslations();
+    await _initializeTranslations(next);
   } else {
     next(action);
   }
@@ -52,12 +52,16 @@ Future _saveCityNameToPrefsAction(SaveCityNameToPrefsAction action) async {
   }
 }
 
-Future _initializeTranslations() async {
+Future _initializeTranslations(NextDispatcher next) async {
   TranslationsHelper translationsHelper = serviceLocator.get<TranslationsHelper>();
   bool areTranslationsInitialized = await translationsHelper.initialize();
 
   if(!areTranslationsInitialized) {
     _showMessageByAction(ErrorLoadingTranslationsAction());
+  } else {
+    print('available');
+    next(TranslationsInitializedAction());
+    translationsHelper.areTranslationsAvailable = true;
   }
 }
 

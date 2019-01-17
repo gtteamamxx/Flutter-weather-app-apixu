@@ -26,6 +26,8 @@ class _$ConditionModelSerializer
       'icon',
       serializers.serialize(object.iconUrl,
           specifiedType: const FullType(String)),
+      'code',
+      serializers.serialize(object.code, specifiedType: const FullType(int)),
     ];
 
     return result;
@@ -50,6 +52,10 @@ class _$ConditionModelSerializer
           result.iconUrl = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
           break;
+        case 'code':
+          result.code = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int;
+          break;
       }
     }
 
@@ -62,16 +68,21 @@ class _$ConditionModel extends ConditionModel {
   final String description;
   @override
   final String iconUrl;
+  @override
+  final int code;
 
   factory _$ConditionModel([void updates(ConditionModelBuilder b)]) =>
       (new ConditionModelBuilder()..update(updates)).build();
 
-  _$ConditionModel._({this.description, this.iconUrl}) : super._() {
+  _$ConditionModel._({this.description, this.iconUrl, this.code}) : super._() {
     if (description == null) {
       throw new BuiltValueNullFieldError('ConditionModel', 'description');
     }
     if (iconUrl == null) {
       throw new BuiltValueNullFieldError('ConditionModel', 'iconUrl');
+    }
+    if (code == null) {
+      throw new BuiltValueNullFieldError('ConditionModel', 'code');
     }
   }
 
@@ -88,19 +99,22 @@ class _$ConditionModel extends ConditionModel {
     if (identical(other, this)) return true;
     return other is ConditionModel &&
         description == other.description &&
-        iconUrl == other.iconUrl;
+        iconUrl == other.iconUrl &&
+        code == other.code;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc(0, description.hashCode), iconUrl.hashCode));
+    return $jf($jc(
+        $jc($jc(0, description.hashCode), iconUrl.hashCode), code.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('ConditionModel')
           ..add('description', description)
-          ..add('iconUrl', iconUrl))
+          ..add('iconUrl', iconUrl)
+          ..add('code', code))
         .toString();
   }
 }
@@ -117,12 +131,17 @@ class ConditionModelBuilder
   String get iconUrl => _$this._iconUrl;
   set iconUrl(String iconUrl) => _$this._iconUrl = iconUrl;
 
+  int _code;
+  int get code => _$this._code;
+  set code(int code) => _$this._code = code;
+
   ConditionModelBuilder();
 
   ConditionModelBuilder get _$this {
     if (_$v != null) {
       _description = _$v.description;
       _iconUrl = _$v.iconUrl;
+      _code = _$v.code;
       _$v = null;
     }
     return this;
@@ -144,7 +163,8 @@ class ConditionModelBuilder
   @override
   _$ConditionModel build() {
     final _$result = _$v ??
-        new _$ConditionModel._(description: description, iconUrl: iconUrl);
+        new _$ConditionModel._(
+            description: description, iconUrl: iconUrl, code: code);
     replace(_$result);
     return _$result;
   }

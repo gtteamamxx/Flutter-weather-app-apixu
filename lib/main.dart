@@ -50,10 +50,20 @@ class ScaffoldPage extends StatelessWidget {
   }
 
   _buildContent() {
+    if(store.state.isLoading) {
+      return _loadingPage();
+    }
+    
     if (store.state.cityName != null && store.state.cityName.isNotEmpty) {
       return DashboardPage();
     } else {
       return SelectCityPage();
     }
+  }
+
+  _loadingPage() {
+    return Center(
+      child: CircularProgressIndicator()
+    );
   }
 }
