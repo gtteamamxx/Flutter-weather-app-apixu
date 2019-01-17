@@ -11,9 +11,10 @@ class RequestAutoCompleteCitiesForSelectCityPageAction {}
 
 class ErrorLoadingAutoCompleteCitiesAction { }
 
-class ShowUnableToloadAutoCompleteCitiesAction extends ErrorBaseAction {
-  ShowUnableToloadAutoCompleteCitiesAction() : super("Wystąpił błąd podczas wczytywania podpowiedzi");
+class ShowUnableToLoadAutoCompleteCitiesAction extends ErrorBaseAction {
+  ShowUnableToLoadAutoCompleteCitiesAction() : super("Wystąpił błąd podczas wczytywania podpowiedzi");
 }
+
 
 class ReceivedAutoCompleteCitiesForSelectCityPageAction {
   ReceivedAutoCompleteCitiesForSelectCityPageAction(this.cities);

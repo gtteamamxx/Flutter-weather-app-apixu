@@ -2,6 +2,7 @@ import 'package:built_value/serializer.dart';
 import 'package:dio/dio.dart';
 import 'package:empty_app/models/auto_complete_city/auto_complete_city_model.dart';
 import 'package:empty_app/models/current_weather_base/current_weather_base_model.dart';
+import 'package:empty_app/models/forecast_root_base/forecast_root_base_model.dart';
 import 'package:empty_app/models/translate_base/translate_model_base.dart';
 import 'package:empty_app/other/serializers.dart';
 
@@ -36,6 +37,18 @@ class WeatherApi {
     Response response = await client.get(url);
 
     return _resultListFromResponse(response, TranslateBaseModel.serializer);
+  }
+
+  Future<ForecastRootBaseModel> fetchForecastWeather(String cityName, {int daysNumber}) async {
+    assert(cityName != null);
+    assert(cityName.isNotEmpty);
+    assert(daysNumber >= 1);
+    assert(daysNumber <= 10);
+
+    final String url = "http://api.apixu.com/v1/forecast.json?key=3d8595c5487d4d61b8080815191001&q=$cityName&days=$daysNumber";
+    Response response = await client.get(url);
+
+    return _resultFromResponse(response, ForecastRootBaseModel.serializer);
   }
 
   List<T> _resultListFromResponse<T>(Response response, Serializer<T> serializer) {
