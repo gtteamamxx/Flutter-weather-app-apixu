@@ -7,13 +7,22 @@ part of serializers;
 // **************************************************************************
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(AstroModel.serializer)
       ..add(AutoCompleteCityModel.serializer)
       ..add(ConditionModel.serializer)
       ..add(CurrentWeatherBaseModel.serializer)
       ..add(CurrentWeatherModel.serializer)
+      ..add(ForecastBaseModel.serializer)
+      ..add(ForecastDayBaseModel.serializer)
+      ..add(ForecastDayModel.serializer)
+      ..add(ForecastRootBaseModel.serializer)
       ..add(LocationModel.serializer)
       ..add(TranslateBaseModel.serializer)
       ..add(TranslateModel.serializer)
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(ForecastDayBaseModel)]),
+          () => new ListBuilder<ForecastDayBaseModel>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(TranslateModel)]),
           () => new ListBuilder<TranslateModel>()))
