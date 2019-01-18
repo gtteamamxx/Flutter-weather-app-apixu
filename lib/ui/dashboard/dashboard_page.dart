@@ -32,13 +32,15 @@ class _DashboardPageState extends State<DashboardPage> {
             ),
             child: Column(
               children: <Widget>[
-                Text(
-                  viewModel.cityName, 
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17.0
-                  ),  
+                Center(
+                  child: Text(
+                    viewModel.cityName, 
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18.0
+                    ),  
+                  ),
                 ),
                 Row(
                   children: <Widget>[
@@ -61,9 +63,13 @@ class _DashboardPageState extends State<DashboardPage> {
                   ],
                   mainAxisAlignment: MainAxisAlignment.center,
                 ),
-                Text(viewModel.getCondition(), style: TextStyle(fontSize: 18)),
+                Center(
+                  child: Text(viewModel.weatherModel.condition.translateCondition(), style: TextStyle(fontSize: 16)),
+                ),
                 SizedBox.fromSize(size: Size(0, 10)),
-                Text('Zaaktualizowano o godzinie ' + viewModel.getLastUpdateDate(), style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                Center(
+                  child: Text('Zaaktualizowano o godzinie ' + viewModel.getLastUpdateDate(), style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold)),
+                ),
                 SizedBox.fromSize(size: Size(0, 10)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -85,6 +91,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 SizedBox.fromSize(size: Size(0, 10)),
                 _buildForecastWidget()
               ],
+              crossAxisAlignment: CrossAxisAlignment.start,
             )
           )
         );

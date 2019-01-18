@@ -45,7 +45,7 @@ class WeatherApi {
     assert(daysNumber >= 1);
     assert(daysNumber <= 10);
 
-    final String url = "http://api.apixu.com/v1/forecast.json?key=3d8595c5487d4d61b8080815191001&q=$cityName&days=$daysNumber";
+    final String url = "http://api.apixu.com/v1/forecast.json?key=$key&q=$cityName&days=$daysNumber";
     Response response = await client.get(url);
 
     return _resultFromResponse(response, ForecastRootBaseModel.serializer);

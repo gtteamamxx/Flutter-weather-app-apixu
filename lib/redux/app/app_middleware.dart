@@ -59,7 +59,6 @@ Future _initializeTranslations(NextDispatcher next) async {
   if(!areTranslationsInitialized) {
     _showMessageByAction(ErrorLoadingTranslationsAction());
   } else {
-    print('available');
     next(TranslationsInitializedAction());
     translationsHelper.areTranslationsAvailable = true;
   }

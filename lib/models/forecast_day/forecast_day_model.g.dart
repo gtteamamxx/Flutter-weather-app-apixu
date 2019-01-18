@@ -63,7 +63,7 @@ class _$ForecastDayModelSerializer
       serializers.serialize(object.condition,
           specifiedType: const FullType(ConditionModel)),
       'uv',
-      serializers.serialize(object.uv, specifiedType: const FullType(double)),
+      serializers.serialize(object.uv, specifiedType: const FullType(String)),
     ];
 
     return result;
@@ -138,7 +138,7 @@ class _$ForecastDayModelSerializer
           break;
         case 'uv':
           result.uv = serializers.deserialize(value,
-              specifiedType: const FullType(double)) as double;
+              specifiedType: const FullType(String)) as String;
           break;
       }
     }
@@ -177,7 +177,7 @@ class _$ForecastDayModel extends ForecastDayModel {
   @override
   final ConditionModel condition;
   @override
-  final double uv;
+  final String uv;
 
   factory _$ForecastDayModel([void updates(ForecastDayModelBuilder b)]) =>
       (new ForecastDayModelBuilder()..update(updates)).build();
@@ -395,9 +395,9 @@ class ForecastDayModelBuilder
   set condition(ConditionModelBuilder condition) =>
       _$this._condition = condition;
 
-  double _uv;
-  double get uv => _$this._uv;
-  set uv(double uv) => _$this._uv = uv;
+  String _uv;
+  String get uv => _$this._uv;
+  set uv(String uv) => _$this._uv = uv;
 
   ForecastDayModelBuilder();
 

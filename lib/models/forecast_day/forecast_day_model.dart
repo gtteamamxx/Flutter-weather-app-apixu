@@ -47,7 +47,7 @@ abstract class ForecastDayModel implements Built<ForecastDayModel, ForecastDayMo
 
   ConditionModel get condition;
 
-  double get uv;
+  String get uv;
 
   ForecastDayModel._();
   factory ForecastDayModel([updates(ForecastDayModelBuilder b)]) => _$ForecastDayModel();

@@ -48,16 +48,8 @@ class DashboardPageViewModel {
   }
 
   String getConditionImageUrl() {
-    final String url = weatherModel.condition.iconUrl;
-    final String fixedUrl = "http://" + url.substring(2);
-    return fixedUrl;
-  }
-
-  String getCondition() {
-    int conditionCode = weatherModel.condition.code;
-    var translator = serviceLocator.get<TranslationsHelper>();
-    String translatedCondition = translator.translateConditionByCode("Polish", conditionCode);
-    return translatedCondition ?? weatherModel.condition.description;
+    final String url = weatherModel.condition.getValidUrl();
+    return url;
   }
 
   static void _changeTemperatureFormat(Store<AppState> store, TemperatureTypeEnum temperatureTypeEnum) {

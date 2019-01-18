@@ -11,7 +11,9 @@ DashboardForecastPageState dashboardForecastPageReducer(DashboardForecastPageSta
   if (action is ReceivedForecastWeatherAction) {
     return state.copyWith(
       isLoading: false,
-      isError: false
+      isError: false,
+      forecast: action.forecast.forecast,
+      selectedDay: action.forecast.forecast?.forecastDays?.first
     );
   }
 
@@ -22,5 +24,10 @@ DashboardForecastPageState dashboardForecastPageReducer(DashboardForecastPageSta
     );
   }
 
+  if(action is ChangeForecastSelectedDayAction) {
+    return state.copyWith(
+      selectedDay: action.selectedDay
+    );
+  }
   return state;
 }
