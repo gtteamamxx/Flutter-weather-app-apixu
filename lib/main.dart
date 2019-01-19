@@ -45,7 +45,7 @@ class ScaffoldPage extends StatelessWidget {
 
     return Scaffold(
       key: serviceLocator.get<GlobalKey<ScaffoldState>>(),
-      body: SizedBox.expand(child: _buildContent()),
+      body: _buildContent(),
     );
   }
 

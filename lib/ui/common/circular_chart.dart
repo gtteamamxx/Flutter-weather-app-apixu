@@ -2,10 +2,11 @@ import 'package:empty_app/ui/common/circular_chart_painter.dart';
 import 'package:flutter/material.dart';
 
 class CircularChart extends StatelessWidget {
-  CircularChart({this.title, this.child, this.percentage});
+  CircularChart({this.title, this.child, this.percentage, this.maxValue});
   final Widget child;
   final String title;
   final double percentage;
+  final double maxValue;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class CircularChart extends StatelessWidget {
                 child: Text(
                   percentage.toStringAsFixed(0) + "%", 
                   style: TextStyle(fontSize: 20)),),
-              painter: CircularCharPainter(percentage, size: 95),
+              painter: CircularCharPainter(percentage, size: 95, maxValue: maxValue),
             )
           ),
         ]

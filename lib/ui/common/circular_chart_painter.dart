@@ -3,14 +3,16 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class CircularCharPainter extends CustomPainter {
-  CircularCharPainter(this.percentage, {this.size});
+  CircularCharPainter(this.percentage, {this.size, this.maxValue = 100});
   final double percentage;
   final double size;
+  double maxValue;
 
   @override
   void paint(Canvas canvas, Size size) {
+    if(maxValue == null) maxValue = 100;
 
-    double arcAngle = 2*pi* (percentage/100) ;
+    double arcAngle = 2*pi* (percentage / maxValue) ;
     arcAngle = (arcAngle <= 0 || arcAngle > 100) ? 100 : arcAngle;
 
     canvas.drawArc(
@@ -24,7 +26,7 @@ class CircularCharPainter extends CustomPainter {
           ..strokeCap = StrokeCap.round
           ..style = PaintingStyle.stroke);
 
-    arcAngle = 2*pi * ((100 - percentage).abs() / 100);
+    arcAngle = 2*pi * ((maxValue - percentage).abs() / maxValue);
 
     canvas.drawArc(
       Rect.fromCircle(center: Offset(size.width/2, size.height/2), radius: this.size/2), 

@@ -1,15 +1,14 @@
 import 'package:empty_app/models/current_weather/current_weather_model.dart';
 import 'package:empty_app/models/location/location_model.dart';
-import 'package:empty_app/other/service_locator.dart';
 import 'package:empty_app/redux/actions/dashboard_page_actions.dart';
 import 'package:empty_app/redux/app/app_state.dart';
 import 'package:empty_app/redux/dashboard/dashboard_page_state.dart';
-import 'package:empty_app/resources/translations_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:redux/redux.dart';
 
 typedef void ChangeTemperature(TemperatureTypeEnum temperatureTypeEnum);
+typedef void OnChangeCity(BuildContext context);
 
 class DashboardPageViewModel {
   DashboardPageViewModel({
@@ -18,7 +17,8 @@ class DashboardPageViewModel {
     @required this.locationModel,
     @required this.isLoading,
     @required this.temperatureType,
-    @required this.changeTemperatureFormat
+    @required this.changeTemperatureFormat,
+    @required this.onChangeCity
   });
   
   final String cityName;
@@ -27,6 +27,7 @@ class DashboardPageViewModel {
   final bool isLoading;
   final TemperatureTypeEnum temperatureType;
   final ChangeTemperature changeTemperatureFormat;
+  final OnChangeCity onChangeCity;
 
   static DashboardPageViewModel fromStore(Store<AppState> store) {
     return DashboardPageViewModel(
@@ -35,7 +36,8 @@ class DashboardPageViewModel {
       locationModel: store.state.dashboardPageState.locationModel,
       weatherModel: store.state.dashboardPageState.weatherModel,
       temperatureType: store.state.dashboardPageState.temperatureType,
-      changeTemperatureFormat: (format) => _changeTemperatureFormat(store, format)
+      changeTemperatureFormat: (format) => _changeTemperatureFormat(store, format),
+      onChangeCity: (context) => _onChangeCity(store, context)
     );
   }
 
@@ -52,10 +54,6 @@ class DashboardPageViewModel {
     return url;
   }
 
-  static void _changeTemperatureFormat(Store<AppState> store, TemperatureTypeEnum temperatureTypeEnum) {
-    store.dispatch(ChangeTemperatureFormatAction(temperatureTypeEnum));
-  }
-
   double getTemperature() {
     return temperatureType == TemperatureTypeEnum.F
       ? weatherModel.tempF
@@ -66,5 +64,13 @@ class DashboardPageViewModel {
     return temperatureType == TemperatureTypeEnum.F
     ? weatherModel.feelTempF
     : weatherModel.feelTempC;
+  }
+
+  static void _onChangeCity(Store<AppState> store, BuildContext context) {
+    store.dispatch(ShowSelectCityPageAction(context));
+  }
+
+  static void _changeTemperatureFormat(Store<AppState> store, TemperatureTypeEnum temperatureTypeEnum) {
+    store.dispatch(ChangeTemperatureFormatAction(temperatureTypeEnum));
   }
 }

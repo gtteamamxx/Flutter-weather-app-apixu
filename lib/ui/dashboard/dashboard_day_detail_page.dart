@@ -35,12 +35,41 @@ class DashboardDayDetailPage extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            CircularChart(title: "Opady", percentage: viewModel.dayInfo.day.precipMm / 100,),
+            CircularChart(title: "Opady", percentage: viewModel.dayInfo.day.precipMm * 2,),
             CircularChart(title: "Wilgotność", percentage: viewModel.dayInfo.day.humidity,)
           ],
         ),
         _space(),
-      
+       Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            CircularChart(
+              title: "Indeks UV",
+              percentage: double.parse(viewModel.dayInfo.day.uv),
+              maxValue: 11,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(viewModel.dayInfo.day.uv, style: TextStyle(fontSize: 20)),
+                  ],
+                )
+              )
+            ),
+            CircularChart(
+              title: "Wiatr (maks.)", 
+              percentage: viewModel.dayInfo.day.maxWindKph,
+              maxValue: 70,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(viewModel.dayInfo.day.maxWindKph.toStringAsFixed(0), style: TextStyle(fontSize: 20)),
+                  Text("km/h")
+                ],
+              )
+            )
+          ],
+        ),
         _space()
       ]),
     );

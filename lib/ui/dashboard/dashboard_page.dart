@@ -7,11 +7,7 @@ import 'package:empty_app/viewmodels/dashboard_page_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 
-class DashboardPage extends StatefulWidget {
-  _DashboardPageState createState() => _DashboardPageState();
-}
-
-class _DashboardPageState extends State<DashboardPage> {
+class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, DashboardPageViewModel>(
@@ -20,7 +16,6 @@ class _DashboardPageState extends State<DashboardPage> {
       builder: (BuildContext context, DashboardPageViewModel viewModel) {
         return Material(
           child: viewModel.isLoading ? _buildProgressIndicator() : Container(
-            padding: EdgeInsets.symmetric(vertical: 50.0, horizontal: 20.0),
             decoration: BoxDecoration(
               color: Colors.red,
               gradient: LinearGradient(
@@ -36,15 +31,23 @@ class _DashboardPageState extends State<DashboardPage> {
               physics: AlwaysScrollableScrollPhysics(),
               child: Column(
                 children: <Widget>[
-                  Center(
-                    child: Text(
-                      viewModel.cityName, 
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18.0
-                      ),  
-                    ),
+                  SizedBox.fromSize(size: Size(0.0, 50.0)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        viewModel.cityName, 
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18.0
+                        ),  
+                      ),
+                      InkWell(
+                        child: Icon(Icons.more_vert, size: 40,),
+                        onTap: () => viewModel.onChangeCity(context),
+                      )
+                    ]
                   ),
                   Row(
                     children: <Widget>[
@@ -76,7 +79,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                   SizedBox.fromSize(size: Size(0, 10)),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       _smallText("Temperatura odczuwalna " + viewModel.getFeelslikeTemperature().toStringAsFixed(0) + "°"),
                       _smallText("Widoczność " + viewModel.weatherModel.visKm.toStringAsFixed(0) + " km")
@@ -84,7 +87,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   ),
                   SizedBox.fromSize(size: Size(0, 5)),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
                       _smallText("Wiatr " + viewModel.weatherModel.windKph.toStringAsFixed(0) + " km/h"),
                       _smallText("Barometr " + viewModel.weatherModel.pressureMb.toStringAsFixed(0) + " mbar"),
