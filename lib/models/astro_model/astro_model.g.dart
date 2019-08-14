@@ -15,7 +15,7 @@ class _$AstroModelSerializer implements StructuredSerializer<AstroModel> {
   final String wireName = 'AstroModel';
 
   @override
-  Iterable serialize(Serializers serializers, AstroModel object,
+  Iterable<Object> serialize(Serializers serializers, AstroModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'sunrise',
@@ -36,7 +36,7 @@ class _$AstroModelSerializer implements StructuredSerializer<AstroModel> {
   }
 
   @override
-  AstroModel deserialize(Serializers serializers, Iterable serialized,
+  AstroModel deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new AstroModelBuilder();
 
@@ -79,7 +79,7 @@ class _$AstroModel extends AstroModel {
   @override
   final String moonSet;
 
-  factory _$AstroModel([void updates(AstroModelBuilder b)]) =>
+  factory _$AstroModel([void Function(AstroModelBuilder) updates]) =>
       (new AstroModelBuilder()..update(updates)).build();
 
   _$AstroModel._({this.sunRise, this.sunSet, this.moonRise, this.moonSet})
@@ -99,7 +99,7 @@ class _$AstroModel extends AstroModel {
   }
 
   @override
-  AstroModel rebuild(void updates(AstroModelBuilder b)) =>
+  AstroModel rebuild(void Function(AstroModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -174,7 +174,7 @@ class AstroModelBuilder implements Builder<AstroModel, AstroModelBuilder> {
   }
 
   @override
-  void update(void updates(AstroModelBuilder b)) {
+  void update(void Function(AstroModelBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -191,4 +191,4 @@ class AstroModelBuilder implements Builder<AstroModel, AstroModelBuilder> {
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

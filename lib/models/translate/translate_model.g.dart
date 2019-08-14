@@ -17,7 +17,7 @@ class _$TranslateModelSerializer
   final String wireName = 'TranslateModel';
 
   @override
-  Iterable serialize(Serializers serializers, TranslateModel object,
+  Iterable<Object> serialize(Serializers serializers, TranslateModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'lang_name',
@@ -38,7 +38,8 @@ class _$TranslateModelSerializer
   }
 
   @override
-  TranslateModel deserialize(Serializers serializers, Iterable serialized,
+  TranslateModel deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new TranslateModelBuilder();
 
@@ -81,7 +82,7 @@ class _$TranslateModel extends TranslateModel {
   @override
   final String nightText;
 
-  factory _$TranslateModel([void updates(TranslateModelBuilder b)]) =>
+  factory _$TranslateModel([void Function(TranslateModelBuilder) updates]) =>
       (new TranslateModelBuilder()..update(updates)).build();
 
   _$TranslateModel._(
@@ -102,7 +103,7 @@ class _$TranslateModel extends TranslateModel {
   }
 
   @override
-  TranslateModel rebuild(void updates(TranslateModelBuilder b)) =>
+  TranslateModel rebuild(void Function(TranslateModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -181,7 +182,7 @@ class TranslateModelBuilder
   }
 
   @override
-  void update(void updates(TranslateModelBuilder b)) {
+  void update(void Function(TranslateModelBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -198,4 +199,4 @@ class TranslateModelBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

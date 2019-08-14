@@ -17,7 +17,7 @@ class _$ForecastBaseModelSerializer
   final String wireName = 'ForecastBaseModel';
 
   @override
-  Iterable serialize(Serializers serializers, ForecastBaseModel object,
+  Iterable<Object> serialize(Serializers serializers, ForecastBaseModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'forecastday',
@@ -30,7 +30,8 @@ class _$ForecastBaseModelSerializer
   }
 
   @override
-  ForecastBaseModel deserialize(Serializers serializers, Iterable serialized,
+  ForecastBaseModel deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ForecastBaseModelBuilder();
 
@@ -44,7 +45,7 @@ class _$ForecastBaseModelSerializer
           result.forecastDays.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
                       BuiltList, const [const FullType(ForecastDayBaseModel)]))
-              as BuiltList);
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -57,7 +58,8 @@ class _$ForecastBaseModel extends ForecastBaseModel {
   @override
   final BuiltList<ForecastDayBaseModel> forecastDays;
 
-  factory _$ForecastBaseModel([void updates(ForecastBaseModelBuilder b)]) =>
+  factory _$ForecastBaseModel(
+          [void Function(ForecastBaseModelBuilder) updates]) =>
       (new ForecastBaseModelBuilder()..update(updates)).build();
 
   _$ForecastBaseModel._({this.forecastDays}) : super._() {
@@ -67,7 +69,7 @@ class _$ForecastBaseModel extends ForecastBaseModel {
   }
 
   @override
-  ForecastBaseModel rebuild(void updates(ForecastBaseModelBuilder b)) =>
+  ForecastBaseModel rebuild(void Function(ForecastBaseModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -122,7 +124,7 @@ class ForecastBaseModelBuilder
   }
 
   @override
-  void update(void updates(ForecastBaseModelBuilder b)) {
+  void update(void Function(ForecastBaseModelBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -148,4 +150,4 @@ class ForecastBaseModelBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

@@ -20,7 +20,8 @@ class _$CurrentWeatherModelSerializer
   final String wireName = 'CurrentWeatherModel';
 
   @override
-  Iterable serialize(Serializers serializers, CurrentWeatherModel object,
+  Iterable<Object> serialize(
+      Serializers serializers, CurrentWeatherModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'last_updated_epoch',
@@ -90,7 +91,8 @@ class _$CurrentWeatherModelSerializer
   }
 
   @override
-  CurrentWeatherModel deserialize(Serializers serializers, Iterable serialized,
+  CurrentWeatherModel deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new CurrentWeatherModelBuilder();
 
@@ -235,7 +237,8 @@ class _$CurrentWeatherModel extends CurrentWeatherModel {
   @override
   final double uv;
 
-  factory _$CurrentWeatherModel([void updates(CurrentWeatherModelBuilder b)]) =>
+  factory _$CurrentWeatherModel(
+          [void Function(CurrentWeatherModelBuilder) updates]) =>
       (new CurrentWeatherModelBuilder()..update(updates)).build();
 
   _$CurrentWeatherModel._(
@@ -328,7 +331,8 @@ class _$CurrentWeatherModel extends CurrentWeatherModel {
   }
 
   @override
-  CurrentWeatherModel rebuild(void updates(CurrentWeatherModelBuilder b)) =>
+  CurrentWeatherModel rebuild(
+          void Function(CurrentWeatherModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -562,7 +566,7 @@ class CurrentWeatherModelBuilder
   }
 
   @override
-  void update(void updates(CurrentWeatherModelBuilder b)) {
+  void update(void Function(CurrentWeatherModelBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -609,4 +613,4 @@ class CurrentWeatherModelBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

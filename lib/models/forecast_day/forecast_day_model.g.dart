@@ -17,7 +17,7 @@ class _$ForecastDayModelSerializer
   final String wireName = 'ForecastDayModel';
 
   @override
-  Iterable serialize(Serializers serializers, ForecastDayModel object,
+  Iterable<Object> serialize(Serializers serializers, ForecastDayModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'maxtemp_c',
@@ -63,14 +63,15 @@ class _$ForecastDayModelSerializer
       serializers.serialize(object.condition,
           specifiedType: const FullType(ConditionModel)),
       'uv',
-      serializers.serialize(object.uv, specifiedType: const FullType(String)),
+      serializers.serialize(object.uv, specifiedType: const FullType(double)),
     ];
 
     return result;
   }
 
   @override
-  ForecastDayModel deserialize(Serializers serializers, Iterable serialized,
+  ForecastDayModel deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ForecastDayModelBuilder();
 
@@ -138,7 +139,7 @@ class _$ForecastDayModelSerializer
           break;
         case 'uv':
           result.uv = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
+              specifiedType: const FullType(double)) as double;
           break;
       }
     }
@@ -177,9 +178,10 @@ class _$ForecastDayModel extends ForecastDayModel {
   @override
   final ConditionModel condition;
   @override
-  final String uv;
+  final double uv;
 
-  factory _$ForecastDayModel([void updates(ForecastDayModelBuilder b)]) =>
+  factory _$ForecastDayModel(
+          [void Function(ForecastDayModelBuilder) updates]) =>
       (new ForecastDayModelBuilder()..update(updates)).build();
 
   _$ForecastDayModel._(
@@ -247,7 +249,7 @@ class _$ForecastDayModel extends ForecastDayModel {
   }
 
   @override
-  ForecastDayModel rebuild(void updates(ForecastDayModelBuilder b)) =>
+  ForecastDayModel rebuild(void Function(ForecastDayModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -395,9 +397,9 @@ class ForecastDayModelBuilder
   set condition(ConditionModelBuilder condition) =>
       _$this._condition = condition;
 
-  String _uv;
-  String get uv => _$this._uv;
-  set uv(String uv) => _$this._uv = uv;
+  double _uv;
+  double get uv => _$this._uv;
+  set uv(double uv) => _$this._uv = uv;
 
   ForecastDayModelBuilder();
 
@@ -432,7 +434,7 @@ class ForecastDayModelBuilder
   }
 
   @override
-  void update(void updates(ForecastDayModelBuilder b)) {
+  void update(void Function(ForecastDayModelBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -473,4 +475,4 @@ class ForecastDayModelBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new

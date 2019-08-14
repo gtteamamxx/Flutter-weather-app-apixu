@@ -4,12 +4,14 @@ import 'package:empty_app/models/condition/condition_model.dart';
 
 part 'current_weather_model.g.dart';
 
-abstract class CurrentWeatherModel implements Built<CurrentWeatherModel, CurrentWeatherModelBuilder> {
-  static Serializer<CurrentWeatherModel> get serializer => _$currentWeatherModelSerializer;
+abstract class CurrentWeatherModel
+    implements Built<CurrentWeatherModel, CurrentWeatherModelBuilder> {
+  static Serializer<CurrentWeatherModel> get serializer =>
+      _$currentWeatherModelSerializer;
 
   @BuiltValueField(wireName: "last_updated_epoch")
   int get lastUpdateTimespan;
-  
+
   @BuiltValueField(wireName: "last_updated")
   String get lastUpdate;
 
@@ -49,9 +51,9 @@ abstract class CurrentWeatherModel implements Built<CurrentWeatherModel, Current
   double get precipIn;
 
   double get humidity;
-  
+
   double get cloud;
-  
+
   @BuiltValueField(wireName: "feelslike_c")
   double get feelTempC;
 
@@ -67,5 +69,6 @@ abstract class CurrentWeatherModel implements Built<CurrentWeatherModel, Current
   double get uv;
 
   CurrentWeatherModel._();
-  factory CurrentWeatherModel([updates(CurrentWeatherModelBuilder b)]) => _$CurrentWeatherModel();
+  factory CurrentWeatherModel([updates(CurrentWeatherModelBuilder b)]) =>
+      _$CurrentWeatherModel();
 }

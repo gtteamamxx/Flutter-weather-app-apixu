@@ -9,15 +9,14 @@ import 'package:redux/redux.dart';
 typedef OnSelectDay(ForecastDayBaseModel day);
 
 class DashboardForecastPageViewModel {
-  DashboardForecastPageViewModel({
-    this.isLoading,
-    this.isError,
-    this.forecast,
-    this.onRefresh,
-    this.onSelectDay,
-    this.selectedDay,
-    this.temperatureType
-  });
+  DashboardForecastPageViewModel(
+      {this.isLoading,
+      this.isError,
+      this.forecast,
+      this.onRefresh,
+      this.onSelectDay,
+      this.selectedDay,
+      this.temperatureType});
 
   final bool isLoading;
   final bool isError;
@@ -29,14 +28,13 @@ class DashboardForecastPageViewModel {
 
   static DashboardForecastPageViewModel fromStore(Store<AppState> store) {
     return DashboardForecastPageViewModel(
-      isLoading: store.state.dashboardForecastPageState.isLoading,
-      forecast: store.state.dashboardForecastPageState.forecast,
-      isError: store.state.dashboardForecastPageState.isError,
-      selectedDay: store.state.dashboardForecastPageState.selectedDay,
-      temperatureType: store.state.dashboardPageState.temperatureType,
-      onSelectDay: (ForecastDayBaseModel day) => _onSelectDay(day, store),
-      onRefresh: () => _onRefresh(store)
-    );
+        isLoading: store.state.dashboardForecastPageState.isLoading,
+        forecast: store.state.dashboardForecastPageState.forecast,
+        isError: store.state.dashboardForecastPageState.isError,
+        selectedDay: store.state.dashboardForecastPageState.selectedDay,
+        temperatureType: store.state.dashboardPageState.temperatureType,
+        onSelectDay: (ForecastDayBaseModel day) => _onSelectDay(day, store),
+        onRefresh: () => _onRefresh(store));
   }
 
   bool isSelectedDay(ForecastDayBaseModel day) {
@@ -45,7 +43,8 @@ class DashboardForecastPageViewModel {
 
   String getDayTileTime(ForecastDayBaseModel dayInfo) {
     DateTime date = DateTime.parse(dayInfo.date);
-    String dayOfWeekShortDescription = _getDayOfWeekShortDescription(date.weekday);
+    String dayOfWeekShortDescription =
+        _getDayOfWeekShortDescription(date.weekday);
     return "$dayOfWeekShortDescription ${date.day}";
   }
 
@@ -55,9 +54,9 @@ class DashboardForecastPageViewModel {
   }
 
   double getDayMaxTemperature(ForecastDayBaseModel dayInfo) {
-    if(temperatureType == TemperatureTypeEnum.F) {
+    if (temperatureType == TemperatureTypeEnum.F) {
       return dayInfo.day.maxTempF;
-    } else if(temperatureType == TemperatureTypeEnum.C) {
+    } else if (temperatureType == TemperatureTypeEnum.C) {
       return dayInfo.day.maxTempC;
     }
 
@@ -65,17 +64,13 @@ class DashboardForecastPageViewModel {
   }
 
   double getDayMinTemperature(ForecastDayBaseModel dayInfo) {
-    if(temperatureType == TemperatureTypeEnum.F) {
+    if (temperatureType == TemperatureTypeEnum.F) {
       return dayInfo.day.minTempF;
-    } else if(temperatureType == TemperatureTypeEnum.C) {
+    } else if (temperatureType == TemperatureTypeEnum.C) {
       return dayInfo.day.minTempC;
     }
-    
-    return double.minPositive;
-  }
 
-  String getDayConditionDescription(ForecastDayBaseModel dayInfo) {
-    
+    return double.minPositive;
   }
 
   static void _onRefresh(Store<AppState> store) {
@@ -87,15 +82,23 @@ class DashboardForecastPageViewModel {
   }
 
   static String _getDayOfWeekShortDescription(int dayOfWeek) {
-    switch(dayOfWeek) {
-      case DateTime.monday: return "pon.";
-      case DateTime.tuesday: return "wt.";
-      case DateTime.wednesday: return "śr.";
-      case DateTime.thursday: return "cz.";
-      case DateTime.friday: return "pt.";
-      case DateTime.saturday: return "sob.";
-      case DateTime.sunday: return "niedz.";
-      default: return "";
+    switch (dayOfWeek) {
+      case DateTime.monday:
+        return "pon.";
+      case DateTime.tuesday:
+        return "wt.";
+      case DateTime.wednesday:
+        return "śr.";
+      case DateTime.thursday:
+        return "cz.";
+      case DateTime.friday:
+        return "pt.";
+      case DateTime.saturday:
+        return "sob.";
+      case DateTime.sunday:
+        return "niedz.";
+      default:
+        return "";
     }
   }
 }

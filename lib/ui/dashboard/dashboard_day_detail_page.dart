@@ -45,13 +45,13 @@ class DashboardDayDetailPage extends StatelessWidget {
           children: [
             CircularChart(
               title: "Indeks UV",
-              percentage: double.parse(viewModel.dayInfo.day.uv),
+              percentage: viewModel.dayInfo.day.uv,
               maxValue: 11,
               child: Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Text(viewModel.dayInfo.day.uv, style: TextStyle(fontSize: 20)),
+                    Text(viewModel.dayInfo.day.uv.toString(), style: TextStyle(fontSize: 20)),
                   ],
                 )
               )

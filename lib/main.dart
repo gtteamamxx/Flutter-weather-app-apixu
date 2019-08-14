@@ -20,17 +20,15 @@ class WeatherApp extends StatelessWidget {
     return StoreProvider<AppState>(
       store: store,
       child: MaterialApp(
-        title: "Weather app",
-        theme: ThemeData.dark(),
-        home: StoreConnector<AppState, dynamic>(
-          converter: (store) => Null,
-          onInit: (store) {
-            store.dispatch(InitializeTranslationsAction());
-            store.dispatch(LoadCityNameFromPrefsAction(context));
-          },
-          builder: (context, viewModel) => ScaffoldPage(store)
-        )
-      ),
+          title: "Weather app",
+          theme: ThemeData.dark(),
+          home: StoreConnector<AppState, dynamic>(
+              converter: (store) => Null,
+              onInit: (store) {
+                store.dispatch(InitializeTranslationsAction());
+                store.dispatch(LoadCityNameFromPrefsAction(context));
+              },
+              builder: (context, viewModel) => ScaffoldPage(store))),
     );
   }
 }
@@ -42,7 +40,6 @@ class ScaffoldPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       key: serviceLocator.get<GlobalKey<ScaffoldState>>(),
       body: _buildContent(),
@@ -50,10 +47,10 @@ class ScaffoldPage extends StatelessWidget {
   }
 
   _buildContent() {
-    if(store.state.isLoading) {
+    if (store.state.isLoading) {
       return _loadingPage();
     }
-    
+
     if (store.state.cityName != null && store.state.cityName.isNotEmpty) {
       return DashboardPage();
     } else {
@@ -62,8 +59,6 @@ class ScaffoldPage extends StatelessWidget {
   }
 
   _loadingPage() {
-    return Center(
-      child: CircularProgressIndicator()
-    );
+    return Center(child: CircularProgressIndicator());
   }
 }

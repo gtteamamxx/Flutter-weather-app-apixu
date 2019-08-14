@@ -17,7 +17,7 @@ class _$ConditionModelSerializer
   final String wireName = 'ConditionModel';
 
   @override
-  Iterable serialize(Serializers serializers, ConditionModel object,
+  Iterable<Object> serialize(Serializers serializers, ConditionModel object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'text',
@@ -34,7 +34,8 @@ class _$ConditionModelSerializer
   }
 
   @override
-  ConditionModel deserialize(Serializers serializers, Iterable serialized,
+  ConditionModel deserialize(
+      Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
     final result = new ConditionModelBuilder();
 
@@ -71,7 +72,7 @@ class _$ConditionModel extends ConditionModel {
   @override
   final int code;
 
-  factory _$ConditionModel([void updates(ConditionModelBuilder b)]) =>
+  factory _$ConditionModel([void Function(ConditionModelBuilder) updates]) =>
       (new ConditionModelBuilder()..update(updates)).build();
 
   _$ConditionModel._({this.description, this.iconUrl, this.code}) : super._() {
@@ -87,7 +88,7 @@ class _$ConditionModel extends ConditionModel {
   }
 
   @override
-  ConditionModel rebuild(void updates(ConditionModelBuilder b)) =>
+  ConditionModel rebuild(void Function(ConditionModelBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
@@ -156,7 +157,7 @@ class ConditionModelBuilder
   }
 
   @override
-  void update(void updates(ConditionModelBuilder b)) {
+  void update(void Function(ConditionModelBuilder) updates) {
     if (updates != null) updates(this);
   }
 
@@ -170,4 +171,4 @@ class ConditionModelBuilder
   }
 }
 
-// ignore_for_file: always_put_control_body_on_new_line,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
+// ignore_for_file: always_put_control_body_on_new_line,always_specify_types,annotate_overrides,avoid_annotating_with_dynamic,avoid_as,avoid_catches_without_on_clauses,avoid_returning_this,lines_longer_than_80_chars,omit_local_variable_types,prefer_expression_function_bodies,sort_constructors_first,test_types_in_equals,unnecessary_const,unnecessary_new
